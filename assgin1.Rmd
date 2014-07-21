@@ -1,0 +1,35 @@
+Title
+========================================================
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring web pages (click the **Help** toolbar button for more details on using R Markdown).
+
+When you click the **Knit HTML** button a web page will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+
+
+```{r}
+mydata<-read.csv("C:/Users/chendan/Desktop/Reproducible Research/repdata-data-activity/activity.csv",header=TRUE)
+countSteps <- aggregate(steps ~ date, mydata, 'sum', na.rm=TRUE) 
+```
+```{r fig.width=7, fig.height=6}
+plot(countSteps$date, countSteps$steps)
+hist(countSteps$steps, breaks = 20)
+```
+```{r}
+countStepsmean <- aggregate(steps ~ date, mydata, 'mean', na.rm=TRUE) 
+countStepsmean
+countStepsmedian<- aggregate(steps ~ date, mydata, 'median', na.rm=TRUE) 
+countStepsmedian
+
+cntSteps <- aggregate(steps ~ interval, mydata, 'mean', na.rm=TRUE)
+```
+```{r fig.width=7, fig.height=6}
+plot(cntSteps, mydata$interval,type='l')
+```
+```{r}
+a<- cntSteps [which(cntSteps$steps==max(cntSteps$steps)),]$interval
+a
+
+x<-is.na(mydata[,1])
+sum(x==TRUE)
+```
